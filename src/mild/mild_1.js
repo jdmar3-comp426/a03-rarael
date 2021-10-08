@@ -12,7 +12,7 @@ export function sumToString(a, b) {
     var result = a + b
     var aToString = a.toString;
     var bToString = b.toString;
-    var answer = aToString + " + " + bToString + " = " + result;
+    var answer = a.toString + " + " + b.toString + " = " + result;
     return answer;
 }
 
@@ -29,7 +29,7 @@ export function sumToString(a, b) {
  */
 export function getIncreasingArray(startNumber, endNumber) {
     let array = [];
-    for(var i = 3; i <= endNumber; i++) {
+    for(var i = 0; i <= endNumber; i++) {
         array.push(i);
     }
     return array;
