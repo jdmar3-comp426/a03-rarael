@@ -10,9 +10,7 @@
  */
 export function sumToString(a, b) {
     var result = a + b
-    var aToString = a.toString;
-    var bToString = b.toString;
-    var answer = a.toString + " + " + b.toString + " = " + result;
+    var answer = a.toString() + " + " + b.toString() + " = " + result;
     return answer;
 }
 
