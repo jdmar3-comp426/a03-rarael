@@ -43,14 +43,16 @@ export function getIncreasingArray(startNumber, endNumber) {
 export function maxAndMin(numbers) {
     var min = numbers[0];
     var max = numbers[0];
-    for(var i = 1; i < numbers.length; i++) {
-        if (numbers[i] < min) {
-            min = numbers[i];
-        } else if (numbers[i] > max) {
-            max = numbers[i];
-        }
-    }
-    return {max, min};
+   // for(var i = 1; i < numbers.length; i++) {
+     //   if (numbers[i] < min) {
+       //     min = numbers[i];
+        //} else if (numbers[i] > max) {
+          //  max = numbers[i];
+       // }
+   // }
+   max = Math.max(...numbers);
+   min = Math.min(...numbers);
+   return {max, min};
 }
 
 /**
@@ -64,5 +66,15 @@ export function maxAndMin(numbers) {
  *
  */
 export function countArray(array) {
-    
+    let object = new Object();
+    array.forEach(element => {
+        if(object.hasOwnProperty(element)) {
+            object[element]++;
+        } else {
+            object[element] = 1;
+        }
+    }); {
+
+    }
+    return object
 }
