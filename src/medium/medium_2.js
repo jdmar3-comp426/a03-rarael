@@ -22,7 +22,7 @@ see under the methods section
 export const allCarStats = {
     avgMpg: {city: findAverageMPGCity(), highway: findAverageMPGHighway()},
     allYearStats: findYearStatistics(),
-    ratioHybrids: findHybridRatio()
+    ratioHybrids: {findHybridRatio()}
 };
 
 export function findAverageMPGCity() {
