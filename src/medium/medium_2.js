@@ -22,7 +22,7 @@ see under the methods section
 export const allCarStats = {
     avgMpg: {city: findAverageMPGCity(), highway: findAverageMPGHighway()},
     allYearStats: findYearStatistics(),
-    ratioHybrids: {findHybridRatio()}
+    ratioHybrids: findHybridRatio(),
 };
 
 export function findAverageMPGCity() {
@@ -32,7 +32,7 @@ export function findAverageMPGCity() {
         sum += element["city_mpg"]
     })
     return sum / total
-}
+};
 
 export function findAverageMPGHighway() {
     let sum = 0
@@ -41,7 +41,7 @@ export function findAverageMPGHighway() {
         sum += element["highway_mpg"]
     })
     return sum / total
-}
+};
 
 export function findYearStatistics() {
     let array =[]
@@ -49,7 +49,7 @@ export function findYearStatistics() {
         array.push(element["year"])
     })
     return getStatistics(array)
-}
+};
 
 export function findHybridRatio() {
     let numOfHybrids = 0
