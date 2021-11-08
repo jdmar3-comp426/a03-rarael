@@ -23,6 +23,7 @@ export const allCarStats = {
     avgMpg: {city: findAverageMPGCity(), highway: findAverageMPGHighway()},
     allYearStats: findYearStatistics(),
     ratioHybrids: findHybridRatio(),
+    
 };
 
 export function findAverageMPGCity() {
@@ -64,7 +65,7 @@ export function findHybridRatio() {
     })
 
     return numOfHybrids/numOfNonHybrids;
-}
+};
 
 /**
  * HINT: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
@@ -127,3 +128,7 @@ export const moreStats = {
     makerHybrids: undefined,
     avgMpgByYearAndHybrid: undefined
 };
+
+export function findHybrids() {
+    
+}
