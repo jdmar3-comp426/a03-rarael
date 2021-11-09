@@ -178,21 +178,21 @@ export function findAvgMPGByYearAndHybrid() {
                     obj[element.year].hybrid = {city: element.city_mpg, highway: element.highway_mpg }
                 } else {
                     obj[element.year].hybrid.city = (obj[element.year].hybrid.city + element.city_mpg) / 2
-                    obj[element.year].hybrid.highway = (obj[element.year].hybrid.highway) + element.highway_mpg
+                    obj[element.year].hybrid.highway = (obj[element.year].hybrid.highway + element.highway_mpg) / 2
                 }
             } else if (!element.hybrid){
                 if(obj[element.year].notHybrid == undefined) {
                     obj[element.year].notHybrid = {city: element.city_mpg, highway: element.highway_mpg }
                 } else {
                     obj[element.year].notHybrid.city = (obj[element.year].notHybrid.city + element.city_mpg) / 2
-                    obj[element.year].notHybrid.highway = (obj[element.year].notHybrid.highway) + element.highway_mpg
+                    obj[element.year].notHybrid.highway = (obj[element.year].notHybrid.highway + element.highway_mpg) / 2
                 }
             }
         } else {
             if (element.hybrid) {
-                obj[element.year] = {hybrid: {city: element.city_mpg , highway: element.highway_mpg }}
+                obj[element.year] = {hybrid: {city: element.city_mpg , highway: element.highway_mpg }, notHybrid: new Object()}
             } else {
-                obj[element.year] = {notHybrid: {city: element.city_mpg , highway: element.highway_mpg}}
+                obj[element.year] = {hybrid: new Object(), notHybrid: {city: element.city_mpg , highway: element.highway_mpg}}
             }
         }
     })
