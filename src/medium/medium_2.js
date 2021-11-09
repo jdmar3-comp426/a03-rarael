@@ -23,6 +23,7 @@ export const allCarStats = {
     avgMpg: {city: findAverageMPGCity(), highway: findAverageMPGHighway()},
     allYearStats: findYearStatistics(),
     ratioHybrids: findHybridRatio(),
+
 };
 
 export function findAverageMPGCity() {
@@ -170,19 +171,18 @@ export function findAvgMPGByYearAndHybrid() {
     let obj = new Object()
     mpg_data.forEach(element => {
         //Check to see if the year is in the obj
-        let yearOfElement = element.year
         if(obj[element.year] != undefined) {
             // now calculate new average
             if (element.hybrid) {
                 if(obj[element.year].hybrid == undefined) {
-                    obj[element.year].hybrid = {city: element.city_mpg, highway: element.highway_mpg }
+                    obj[element.year] = {hybrid: {city: element.city_mpg , highway: element.highway_mpg }, notHybrid: obj[element.year].notHybrid}
                 } else {
                     obj[element.year].hybrid.city = (obj[element.year].hybrid.city + element.city_mpg) / 2
                     obj[element.year].hybrid.highway = (obj[element.year].hybrid.highway + element.highway_mpg) / 2
                 }
             } else if (!element.hybrid){
                 if(obj[element.year].notHybrid == undefined) {
-                    obj[element.year].notHybrid = {city: element.city_mpg, highway: element.highway_mpg }
+                    obj[element.year] = {hybrid: obj[element.year].hybrid, notHybrid: {city: element.city_mpg , highway: element.highway_mpg }}
                 } else {
                     obj[element.year].notHybrid.city = (obj[element.year].notHybrid.city + element.city_mpg) / 2
                     obj[element.year].notHybrid.highway = (obj[element.year].notHybrid.highway + element.highway_mpg) / 2
@@ -190,9 +190,9 @@ export function findAvgMPGByYearAndHybrid() {
             }
         } else {
             if (element.hybrid) {
-                obj[element.year] = {hybrid: {city: element.city_mpg , highway: element.highway_mpg }, notHybrid: new Object()}
+                obj[element.year] = {hybrid: {city: element.city_mpg , highway: element.highway_mpg }}
             } else {
-                obj[element.year] = {hybrid: new Object(), notHybrid: {city: element.city_mpg , highway: element.highway_mpg}}
+                obj[element.year] = { notHybrid: {city: element.city_mpg , highway: element.highway_mpg}}
             }
         }
     })
