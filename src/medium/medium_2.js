@@ -175,29 +175,24 @@ export function findAvgMPGByYearAndHybrid() {
             // now calculate new average
             if (element.hybrid) {
                 if(obj[element.year].hybrid == undefined) {
-                    obj[element.year].hybrid.city = element.city_mpg 
-                    obj[element.year].hybrid.highway = element.highway_mpg
+                    obj[element.year].hybrid = {city: element.city_mpg, highway: element.highway_mpg }
                 } else {
                     obj[element.year].hybrid.city = (obj[element.year].hybrid.city + element.city_mpg) / 2
                     obj[element.year].hybrid.highway = (obj[element.year].hybrid.highway) + element.highway_mpg
                 }
             } else if (!element.hybrid){
                 if(obj[element.year].notHybrid == undefined) {
-                    obj[element.year].notHybrid.city = element.city_mpg 
-                    obj[element.year].notHybrid.highway = element.highway_mpg
+                    obj[element.year].notHybrid = {city: element.city_mpg, highway: element.highway_mpg }
                 } else {
                     obj[element.year].notHybrid.city = (obj[element.year].notHybrid.city + element.city_mpg) / 2
                     obj[element.year].notHybrid.highway = (obj[element.year].notHybrid.highway) + element.highway_mpg
                 }
             }
         } else {
-            obj[element.year] = {hybrid: {city: 0, highway: 0 }, notHybrid: {city: 0, highway: 0 }}
             if (element.hybrid) {
-                obj[element.year].hybrid.city = element.city_mpg 
-                obj[element.year].hybrid.highway = element.highway_mpg
+                obj[element.year] = {hybrid: {city: element.city_mpg , highway: element.highway_mpg }}
             } else {
-                obj[element.year].notHybrid.city = element.city_mpg 
-                obj[element.year].notHybrid.highway = element.highway_mpg
+                obj[element.year] = {notHybrid: {city: element.city_mpg , highway: element.highway_mpg}}
             }
         }
     })
