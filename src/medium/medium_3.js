@@ -25,6 +25,17 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
         }
     })
     // now sort
+    array.sort(function(a,b) {
+        if(a.horsepower > b.horsepower) {
+            return -1
+        } else if (a.horsepower < b.horsepower) {
+            return 1
+        } else {
+            return 0
+        }
+    })
+
+    return array
 }
 
 
@@ -39,7 +50,24 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  *
  */
 export function searchMpg(car_data, minCity, minHighway) {
+    let array = []
+    car_data.forEach(element => {
+        if (element["highway_mpg"] >= minHighway && element["city_mpg"] > minCity) {
+            array.push(element)
+        }
+    })
+    // now sort
+    array.sort(function(a,b) {
+        if(a.highway_mpg > b.highway_mpg) {
+            return -1
+        } else if (a.highway_mpg < b.highway_mpg) {
+            return 1
+        } else {
+            return 0
+        }
+    })
 
+    return array
 }
 
 
@@ -52,7 +80,28 @@ export function searchMpg(car_data, minCity, minHighway) {
  * @returns {[]} array of cars
  */
 export function searchName(car_data, searchTerm) {
+    let array = []
+    car_data.forEach(element => {
+        let id = (element["id"])
+        if(id.includes(searchTerm)) {
+            array.push(element)
+        }
+    })
 
+    // now sort by order of when searchterm appeared
+    array.sort(function (a, b) {
+        let indexA = a.id.indexOf(searchTerm)
+        let indexB = b.id.indexOf(searchTerm)
+        if(indexA > indexB) {
+            return 1
+        } else if (indexA < indexB) {
+            return -1
+        } else {
+            return 0
+        }
+    })
+
+    return array
 }
 
 
@@ -65,5 +114,25 @@ export function searchName(car_data, searchTerm) {
  * @returns {[]} an array of car objects
  */
 export function searchByYear(car_data, years) {
+    let array = []
+    car_data.forEach(element => {   
+        if(years.includes(element["year"])) {
+            array.push(element)
+        }
+    })
 
+    // now sort by order of when searchterm appeared
+    array.sort(function (a, b) {
+        let indexA = a.year
+        let indexB = b.year
+        if(indexA > indexB) {
+            return 1
+        } else if (indexA < indexB) {
+            return -1
+        } else {
+            return 0
+        }
+    })
+
+    return array
 }
