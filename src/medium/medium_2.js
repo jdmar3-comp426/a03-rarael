@@ -23,7 +23,6 @@ export const allCarStats = {
     avgMpg: {city: findAverageMPGCity(), highway: findAverageMPGHighway()},
     allYearStats: findYearStatistics(),
     ratioHybrids: findHybridRatio(),
-    
 };
 
 export function findAverageMPGCity() {
@@ -125,10 +124,82 @@ export function findHybridRatio() {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: findHybrids(),
+    avgMpgByYearAndHybrid: findAvgMPGByYearAndHybrid(),
+
 };
 
 export function findHybrids() {
-    
+    let array = []
+    mpg_data.forEach(element=> {
+        // check to see if hybrid car
+        if (element.hybrid) {
+            //check if array contains object with the same make
+            let makes = element["make"]
+            let hasMake = false;
+            array.forEach(element2 =>{
+                let makes2 = element2["make"]
+                //contains make already
+                if (element2["make"] != undefined && makes == makes2) {
+                    hasMake = true;
+                    (element2.hybrids).push(element["id"])
+                }
+            })
+            // does not contain make, need to make new object 
+            if (!hasMake) {
+                let array2 = [element["id"]]
+                let obj = {make: element["make"], hybrids: array2}
+                array.push(obj)
+            }          
+        }
+    })
+    //now need to sort by # of hybrids
+    array.sort(function(a, b) {
+        if(a.hybrids.length < b.hybrids.length) {
+            return 1
+        } else if(a.hybrids.length > b.hybrids.length) {
+            return -1
+        } else {
+            return 0
+        }
+    })
+    return array
+}
+
+export function findAvgMPGByYearAndHybrid() {
+    let obj = new Object()
+    mpg_data.forEach(element => {
+        //Check to see if the year is in the obj
+        let yearOfElement = element.year
+        if(obj[element.year] != undefined) {
+            // now calculate new average
+            if (element.hybrid) {
+                if(obj[element.year].hybrid == undefined) {
+                    obj[element.year].hybrid.city = element.city_mpg 
+                    obj[element.year].hybrid.highway = element.highway_mpg
+                } else {
+                    obj[element.year].hybrid.city = (obj[element.year].hybrid.city + element.city_mpg) / 2
+                    obj[element.year].hybrid.highway = (obj[element.year].hybrid.highway) + element.highway_mpg
+                }
+            } else if (!element.hybrid){
+                if(obj[element.year].notHybrid == undefined) {
+                    obj[element.year].notHybrid.city = element.city_mpg 
+                    obj[element.year].notHybrid.highway = element.highway_mpg
+                } else {
+                    obj[element.year].notHybrid.city = (obj[element.year].notHybrid.city + element.city_mpg) / 2
+                    obj[element.year].notHybrid.highway = (obj[element.year].notHybrid.highway) + element.highway_mpg
+                }
+            }
+        } else {
+            obj[element.year] = {hybrid: {city: 0, highway: 0 }, notHybrid: {city: 0, highway: 0 }}
+            if (element.hybrid) {
+                obj[element.year].hybrid.city = element.city_mpg 
+                obj[element.year].hybrid.highway = element.highway_mpg
+            } else {
+                obj[element.year].notHybrid.city = element.city_mpg 
+                obj[element.year].notHybrid.highway = element.highway_mpg
+            }
+        }
+    })
+    return obj
 }
