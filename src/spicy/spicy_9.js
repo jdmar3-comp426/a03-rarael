@@ -17,7 +17,7 @@
 export const repeat = (fn, n, ...params) => {
     let array =[]
     for(let i = 0; i < n; i++) {
-        array.push(fn(params))
+        array.push(fn(...params))
     }
     return array
 };
@@ -28,7 +28,7 @@ export const repeat = (fn, n, ...params) => {
  *   10 times.
  */
 export const repeatDemo = () => {
-    repeat(console.log, 10, ["Hello, world"] )
+    repeat(console.log, 10, "Hello, world!" )
 };
 
 
